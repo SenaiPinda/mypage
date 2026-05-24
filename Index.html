@@ -3,58 +3,1177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Links para Redes Sociais</title>
+    <title>Professor Welington Hopka</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f5ff',
+                            100: '#e0eaff',
+                            200: '#c2d5ff',
+                            300: '#94b8ff',
+                            400: '#6699ff',
+                            500: '#3b7aff',
+                            600: '#1e5ef5',
+                            700: '#1547d9',
+                            800: '#1639b5',
+                            900: '#18318f',
+                        },
+                        accent: {
+                            50: '#fff8e1',
+                            100: '#ffe9b3',
+                            200: '#ffd980',
+                            300: '#ffc94d',
+                            400: '#ffbb20',
+                            500: '#f5a623',
+                            600: '#d4850f',
+                            700: '#b06a0a',
+                            800: '#8d5210',
+                            900: '#7a440f',
+                        },
+                        navy: {
+                            800: '#1a2332',
+                            900: '#0f1722',
+                        }
+                    },
+                    fontFamily: {
+                        'display': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            /* Fundo em degradê: do azul claro ao branco */
-            background: linear-gradient(to right, #a2c2e1, #f4f4f4);
+        * { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+
+        /* Hero animated gradient */
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f1722 0%, #1a2332 30%, #1e3a5f 60%, #2d5a8e 100%);
+            position: relative;
+            overflow: hidden;
         }
-        .container {
-            padding: 20px;
-            background-color: linear-gradient(to right, #a2c2e1, #f4f4f4);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(59,122,255,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(245,166,35,0.06) 0%, transparent 40%);
+            animation: heroFloat 20s ease-in-out infinite;
         }
-        h1 {
-            color: #333;
+        @keyframes heroFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(2%, -2%) rotate(1deg); }
+            66% { transform: translate(-1%, 1%) rotate(-0.5deg); }
         }
-        .social-links {
-            list-style-type: none;
-            padding: 0;
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.15;
+            animation: floatUp linear infinite;
         }
-        .social-links li {
-            display: inline;
-            margin: 0 10px;
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
         }
-        .social-links a {
-            text-decoration: none;
+
+        /* Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .social-links img {
-            width: 50px;
-            height: 50px;
-            transition: transform 0.2s;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .social-links img:hover {
-            transform: scale(1.1);
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Card hover effects */
+        .edu-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .edu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.15);
+        }
+
+        /* Gallery grid */
+        .gallery-item {
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+            z-index: 10;
+        }
+        .gallery-item img {
+            transition: transform 0.6s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Portfolio card */
+        .portfolio-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.2);
+        }
+        .portfolio-card .portfolio-img {
+            transition: transform 0.6s ease;
+        }
+        .portfolio-card:hover .portfolio-img {
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #f5a623;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f1722; }
+        ::-webkit-scrollbar-thumb { background: #3b7aff; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6699ff; }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Quote animation */
+        .quote-mark {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        /* Timeline line */
+        .timeline-line {
+            background: linear-gradient(180deg, #3b7aff, #f5a623);
+        }
+
+        /* Form focus */
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(59,122,255,0.2);
+        }
+
+        /* Toast notification */
+        .toast {
+            animation: slideInRight 0.4s ease, fadeOut 0.4s ease 2.6s forwards;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateX(100%); }
+        }
+
+        /* Back to top */
+        .back-to-top {
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Glass effect */
+        .glass {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        /* Typing cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Meus Links para Redes Sociais</h1>
-        <ul class="social-links">
-            <li><a href="https://www.facebook.com/profile.php?id=100077098840627" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"></a></li>
-            <li><a href="https://www.instagram.com/welington_hopka/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a></li>
-            <li><a href="https://www.linkedin.com/in/welington-hopka/" target="_blank"><img src="https://th.bing.com/th/id/R.a330e248626552a23af35e5c46526234?rik=aCeYEG%2f6vtPYGg&pid=ImgRaw&r=0" alt="LinkedIn"></a></li>
-            <li><a href="https://www.youtube.com/@welingtonhopka" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube"></a></li>
-            <li><a href="https://www.duolingo.com/profile/Welington_Hopka1" target="_blank"><img src="https://companieslogo.com/img/orig/DUOL-5baebe62.png?t=1660638203" alt="Duolingo"></a></li>
-            <!-- Adicione outros links conforme necessário -->
-        </ul>
-        <img src="https://scontent.fsjk4-1.fna.fbcdn.net/v/t39.30808-6/441954606_460635549849736_67234718317331567_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeEZV28-uAgxxFdI0OVzZy86C9o51BKT28cL2jnUEpPbx83BMvHDsLpx14RvG-L0iMc6EVxRWqiDKlX6lZ3rvZjF&_nc_ohc=wNbOVmXiM4oQ7kNvgFYRJ4D&_nc_ht=scontent.fsjk4-1.fna&oh=00_AYBITyUq_Q6kZ0m6NxiGO1ax-OC0YZD_fjRMBPPahSXpUA&oe=66C7E03D" alt="Minha Foto" style="width: 30%; margin-top: 20px;">
+<body class="bg-gray-50 text-gray-800 font-body overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-20">
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center text-white font-display font-bold text-lg shadow-lg group-hover:shadow-xl transition-shadow">
+                        WH
+                    </div>
+                    <div class="hidden sm:block">
+                        <span class="text-white font-display font-semibold text-sm lg:text-base block leading-tight">Prof. Welington</span>
+                        <span class="text-primary-300 text-xs">Hopka</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-1">
+                    <a href="#about" class="nav-link text-white/80 hover:text-white px-4 py-2 text-sm font-medium transition-colors">Sobre Mim</a>
+                    <a href="#education" class="nav-link text-white/80 hover:text-white px-4 py-2 text-sm font-medium transition-colors">Área Acadêmica</a>
+                    <a href="#students" class="nav-link text-white/80 hover:text-white px-4 py-2 text-sm font-medium transition-colors">Alunos</a>
+                    <a href="#portfolio" class="nav-link text-white/80 hover:text-white px-4 py-2 text-sm font-medium transition-colors">Portfólio</a>
+                    <a href="#contact" class="bg-accent-500 hover:bg-accent-600 text-navy-900 font-semibold px-5 py-2.5 rounded-xl text-sm transition-all hover:shadow-lg hover:shadow-accent-500/25">Contato</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="menuToggle" class="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed inset-0 z-50 bg-navy-900/98 glass md:hidden">
+        <div class="flex flex-col h-full p-6">
+            <div class="flex justify-between items-center mb-10">
+                <span class="text-white font-display font-bold text-xl">Menu</span>
+                <button id="menuClose" class="text-white p-2 hover:bg-white/10 rounded-lg transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="flex flex-col gap-2">
+                <a href="#about" class="mobile-nav-link text-white/80 hover:text-white text-lg py-3 px-4 rounded-xl hover:bg-white/5 transition-all">Sobre Mim</a>
+                <a href="#education" class="mobile-nav-link text-white/80 hover:text-white text-lg py-3 px-4 rounded-xl hover:bg-white/5 transition-all">Área Acadêmica</a>
+                <a href="#students" class="mobile-nav-link text-white/80 hover:text-white text-lg py-3 px-4 rounded-xl hover:bg-white/5 transition-all">Alunos</a>
+                <a href="#portfolio" class="mobile-nav-link text-white/80 hover:text-white text-lg py-3 px-4 rounded-xl hover:bg-white/5 transition-all">Portfólio</a>
+                <a href="#contact" class="mobile-nav-link bg-accent-500 text-navy-900 font-semibold text-center py-3 px-4 rounded-xl mt-4 hover:bg-accent-600 transition-all">Contato</a>
+            </div>
+            <div class="mt-auto pt-8 border-t border-white/10">
+                <div class="flex justify-center gap-4">
+                    <a href="https://www.facebook.com/profile.php?id=100077098840627" target="_blank" class="text-white/60 hover:text-white p-2 transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a href="https://www.instagram.com/welington_hopka/" target="_blank" class="text-white/60 hover:text-white p-2 transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="https://github.com/Whellingthon" target="_blank" class="text-white/60 hover:text-white p-2 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                    <a href="https://www.linkedin.com/in/welington-hopka/" target="_blank" class="text-white/60 hover:text-white p-2 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                    <a href="https://www.youtube.com/@welingtonhopka" target="_blank" class="text-white/60 hover:text-white p-2 transition-colors"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-gradient min-h-screen flex items-center relative">
+        <div id="particles-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="inline-flex items-center gap-2 bg-white/10 glass rounded-full px-4 py-2 mb-6">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span class="text-primary-200 text-sm font-medium">SENAI Pindamonhangaba</span>
+                    </div>
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6">
+                        Professor<br>
+                        <span class="bg-gradient-to-r from-accent-400 to-accent-300 bg-clip-text text-transparent">Welington</span>
+                        <br>Hopka
+                    </h1>
+                    <div class="relative mb-8">
+                        <span class="quote-mark absolute -left-4 -top-6 text-6xl text-accent-400/20 font-display">"</span>
+                        <p class="text-lg sm:text-xl text-primary-100/90 italic leading-relaxed pl-4 border-l-2 border-accent-400/40">
+                            A arte de ensinar é a arte de auxiliar a descoberta.
+                        </p>
+                        <p class="text-accent-400/70 text-sm mt-2 pl-4">— Mark Van Doren</p>
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#about" class="group inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-navy-900 font-semibold px-8 py-4 rounded-2xl transition-all hover:shadow-xl hover:shadow-accent-500/20 hover:-translate-y-0.5">
+                            Conheça Mais
+                            <i data-lucide="arrow-down" class="w-5 h-5 group-hover:translate-y-0.5 transition-transform"></i>
+                        </a>
+                        <a href="#portfolio" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 glass text-white font-semibold px-8 py-4 rounded-2xl transition-all border border-white/10 hover:border-white/20">
+                            <i data-lucide="folder-open" class="w-5 h-5"></i>
+                            Portfólio
+                        </a>
+                    </div>
+                    <div class="flex items-center gap-6 mt-10">
+                        <div class="flex -space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-primary-400 border-2 border-navy-900 flex items-center justify-center text-white text-xs font-bold">TI</div>
+                            <div class="w-10 h-10 rounded-full bg-accent-400 border-2 border-navy-900 flex items-center justify-center text-navy-900 text-xs font-bold">ED</div>
+                            <div class="w-10 h-10 rounded-full bg-green-400 border-2 border-navy-900 flex items-center justify-center text-white text-xs font-bold">BD</div>
+                        </div>
+                        <div class="text-white/70 text-sm">
+                            <span class="text-white font-semibold">6+</span> formações acadêmicas
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 flex justify-center">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-primary-500/30 to-accent-500/30 rounded-3xl blur-2xl animate-pulse"></div>
+                        <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden border-4 border-white/20 shadow-2xl">
+                            <img src="https://mypage-chi-cyan.vercel.app/img/20240819_152459.jpg" alt="Professor Welington Hopka" class="w-full h-full object-cover" />
+                        </div>
+                        <div class="absolute -bottom-3 -right-3 bg-accent-500 text-navy-900 rounded-2xl px-4 py-2 shadow-lg font-bold text-sm flex items-center gap-2">
+                            <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+                            Mestrando
+                        </div>
+                        <div class="absolute -top-3 -left-3 bg-primary-500 text-white rounded-2xl px-4 py-2 shadow-lg font-bold text-sm flex items-center gap-2">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                            TI & Educação
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-white/40 hover:text-white/70 transition-colors">
+                <i data-lucide="chevrons-down" class="w-6 h-6"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 lg:py-32 bg-white relative">
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-200 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="reveal">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                        <img src="https://mypage-chi-cyan.vercel.app/img/20240819_152459.jpg" alt="Professor Welington Hopka" class="w-full h-[500px] object-cover" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-900/60 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <div class="glass bg-white/10 rounded-2xl p-4 border border-white/20">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 bg-accent-500 rounded-xl flex items-center justify-center">
+                                        <i data-lucide="award" class="w-6 h-6 text-navy-900"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-semibold">Instrutor SENAI</p>
+                                        <p class="text-white/70 text-sm">Pindamonhangaba/SP</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal reveal-delay-1">
+                    <div class="inline-flex items-center gap-2 bg-primary-50 text-primary-700 rounded-full px-4 py-2 mb-4">
+                        <i data-lucide="user" class="w-4 h-4"></i>
+                        <span class="text-sm font-semibold uppercase tracking-wide">Sobre Mim</span>
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-navy-900 mb-6 leading-tight">
+                        Educador, Tecnólogo<br>e <span class="text-primary-600">Apaixonado</span> por Ensino
+                    </h2>
+                    <div class="space-y-4 text-gray-600 leading-relaxed">
+                        <p>
+                            Sou Instrutor de Formação Profissional no <strong class="text-navy-900">SENAI Pindamonhangaba/SP</strong>, com ampla experiência em TI, telecomunicações e suporte técnico, tendo trabalhado em empresas como Connectis, Atacadão e Claro Brasil.
+                        </p>
+                        <p>
+                            Possuo graduação em <strong class="text-navy-900">Análise e Desenvolvimento de Sistemas</strong> pela FATEC-SP, <strong class="text-navy-900">Pedagogia</strong> pela UNESP, pós-graduação em Desenvolvimento de Aplicativos Móveis e TI na Educação pela UNIVIRTUA, e atualmente estou cursando <strong class="text-navy-900">mestrado em Big Data e Business Intelligence</strong> pela ENEB.
+                        </p>
+                        <p>
+                            Minha filosofia de ensino gira em torno de estimular o <strong class="text-primary-600">pensamento crítico</strong> e a <strong class="text-primary-600">aplicação prática</strong> do conhecimento para preparar os alunos para os desafios do mercado de trabalho moderno.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 mt-8">
+                        <div class="bg-gradient-to-br from-primary-50 to-primary-100/50 rounded-2xl p-4 text-center">
+                            <p class="text-3xl font-bold text-primary-700">6+</p>
+                            <p class="text-xs text-gray-500 mt-1">Formações</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-accent-50 to-accent-100/50 rounded-2xl p-4 text-center">
+                            <p class="text-3xl font-bold text-accent-600">3+</p>
+                            <p class="text-xs text-gray-500 mt-1">Empresas</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-green-100/50 rounded-2xl p-4 text-center">
+                            <p class="text-3xl font-bold text-green-600">500+</p>
+                            <p class="text-xs text-gray-500 mt-1">Alunos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 lg:py-32 bg-gradient-to-b from-gray-50 to-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 bg-primary-50 text-primary-700 rounded-full px-4 py-2 mb-4">
+                    <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+                    <span class="text-sm font-semibold uppercase tracking-wide">Formação Acadêmica</span>
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-navy-900 mb-4">
+                    Área <span class="text-primary-600">Acadêmica</span>
+                </h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">
+                    Uma trajetória de aprendizado contínuo, combinando tecnologia e educação para transformar vidas.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Education Card 1 -->
+                <div class="edu-card reveal reveal-delay-1 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-green-100 to-transparent rounded-bl-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center gap-1 bg-green-100 text-green-700 rounded-full px-3 py-1 text-xs font-semibold mb-4">
+                            <i data-lucide="check-circle" class="w-3 h-3"></i>
+                            Concluído
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-navy-900 mb-2">Análise e Desenvolvimento de Sistemas</h3>
+                        <p class="text-primary-600 font-semibold mb-1">FATEC-SP</p>
+                        <p class="text-gray-400 text-sm">Graduação</p>
+                    </div>
+                </div>
+
+                <!-- Education Card 2 -->
+                <div class="edu-card reveal reveal-delay-2 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-green-100 to-transparent rounded-bl-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center gap-1 bg-green-100 text-green-700 rounded-full px-3 py-1 text-xs font-semibold mb-4">
+                            <i data-lucide="check-circle" class="w-3 h-3"></i>
+                            Concluído
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-navy-900 mb-2">Pedagogia</h3>
+                        <p class="text-primary-600 font-semibold mb-1">UNESP</p>
+                        <p class="text-gray-400 text-sm">Graduação</p>
+                    </div>
+                </div>
+
+                <!-- Education Card 3 -->
+                <div class="edu-card reveal reveal-delay-3 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-green-100 to-transparent rounded-bl-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center gap-1 bg-green-100 text-green-700 rounded-full px-3 py-1 text-xs font-semibold mb-4">
+                            <i data-lucide="check-circle" class="w-3 h-3"></i>
+                            Concluído
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-navy-900 mb-2">Licenciatura em Matemática</h3>
+                        <p class="text-primary-600 font-semibold mb-1">FCE - Faculdade Campos Elíseos</p>
+                        <p class="text-gray-400 text-sm">Graduação</p>
+                    </div>
+                </div>
+
+                <!-- Education Card 4 -->
+                <div class="edu-card reveal reveal-delay-1 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-blue-100 to-transparent rounded-bl-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center gap-1 bg-blue-100 text-blue-700 rounded-full px-3 py-1 text-xs font-semibold mb-4">
+                            <i data-lucide="award" class="w-3 h-3"></i>
+                            Pós-graduação
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-navy-900 mb-2">Desenvolvimento de Aplicativos Móveis</h3>
+                        <p class="text-primary-600 font-semibold mb-1">UNIVIRTUA</p>
+                        <p class="text-gray-400 text-sm">Pós-graduação</p>
+                    </div>
+                </div>
+
+                <!-- Education Card 5 -->
+                <div class="edu-card reveal reveal-delay-2 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-blue-100 to-transparent rounded-bl-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center gap-1 bg-blue-100 text-blue-700 rounded-full px-3 py-1 text-xs font-semibold mb-4">
+                            <i data-lucide="award" class="w-3 h-3"></i>
+                            Pós-graduação
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-navy-900 mb-2">Informática e Ludopedagogia</h3>
+                        <p class="text-primary-600 font-semibold mb-1">UNIVIRTUA</p>
+                        <p class="text-gray-400 text-sm">Pós-graduação</p>
+                    </div>
+                </div>
+
+                <!-- Education Card 6 -->
+                <div class="edu-card reveal reveal-delay-3 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-accent-100 to-transparent rounded-bl-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center gap-1 bg-accent-100 text-accent-700 rounded-full px-3 py-1 text-xs font-semibold mb-4">
+                            <i data-lucide="loader" class="w-3 h-3 animate-spin"></i>
+                            Em andamento
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-navy-900 mb-2">Big Data & Business Intelligence</h3>
+                        <p class="text-primary-600 font-semibold mb-1">ENEB</p>
+                        <p class="text-gray-400 text-sm">Mestrado</p>
+                        <div class="mt-3 w-full bg-gray-100 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-accent-400 to-accent-500 h-2 rounded-full" style="width: 60%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Students Section -->
+    <section id="students" class="py-20 lg:py-32 bg-navy-900 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-20 left-20 w-72 h-72 bg-primary-500 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-20 w-96 h-96 bg-accent-500 rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 bg-white/10 text-accent-300 rounded-full px-4 py-2 mb-4">
+                    <i data-lucide="users" class="w-4 h-4"></i>
+                    <span class="text-sm font-semibold uppercase tracking-wide">Meus Alunos</span>
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+                    Meu Maior <span class="text-accent-400">Orgulho</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    Meu maior orgulho são meus alunos que conseguem ingressar no mercado de trabalho e transformar suas vidas por meio da educação. Acredito em um ensino prático, baseado em projetos, que os prepara para desafios reais.
+                </p>
+            </div>
+
+            <!-- Photo Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div class="gallery-item reveal rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(0)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/669F7FA6-8BDA-4A01-B3FB-887013F6FBD4.jpg" alt="Alunos em atividade" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal reveal-delay-1 rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(1)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/20240202_165415.png" alt="Alunos em sala" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal reveal-delay-2 rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(2)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/20231215_215321.png" alt="Alunos aprendendo" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal reveal-delay-3 rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(3)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/20240202_205747.png" alt="Alunos em projeto" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(4)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/20240412_205747.png" alt="Atividade prática" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal reveal-delay-1 rounded-2xl overflow-hidden shadow-lg aspect-[3/4] sm:row-span-2 cursor-pointer" onclick="openLightbox(5)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/20240815_115813~2.jpg" alt="Momento em sala" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal reveal-delay-2 rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(6)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/20240819_152459.jpg" alt="Prática de ensino" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal reveal-delay-3 rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(7)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/1732730374350%20Copy.jpg" alt="Alunos em ação" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(8)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/IMG_0168.png" alt="Projeto dos alunos" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal reveal-delay-1 rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(9)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/IMG_0982.png" alt="Equipe de alunos" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal reveal-delay-2 rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(10)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/IMG_1544.png" alt="Apresentação" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal reveal-delay-3 rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(11)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/IMG_1545.png" alt="Trabalho em equipe" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(12)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/IMG_20230813_083108_073.jpg" alt="Aula prática" class="w-full h-full object-cover" />
+                </div>
+                <div class="gallery-item reveal reveal-delay-1 rounded-2xl overflow-hidden shadow-lg aspect-square cursor-pointer" onclick="openLightbox(13)">
+                    <img src="https://mypage-chi-cyan.vercel.app/img/IMG_20241204_215123.jpg" alt="Formatura" class="w-full h-full object-cover" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 hidden items-center justify-center p-4" onclick="closeLightbox(event)">
+        <button onclick="closeLightbox(event)" class="absolute top-6 right-6 text-white/80 hover:text-white transition-colors z-50">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <button id="lightboxPrev" onclick="prevImage(event)" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full z-50">
+            <i data-lucide="chevron-left" class="w-8 h-8"></i>
+        </button>
+        <button id="lightboxNext" onclick="nextImage(event)" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full z-50">
+            <i data-lucide="chevron-right" class="w-8 h-8"></i>
+        </button>
+        <img id="lightboxImg" src="" alt="Gallery" class="max-w-full max-h-[85vh] object-contain rounded-lg" />
+    </div>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 lg:py-32 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 bg-primary-50 text-primary-700 rounded-full px-4 py-2 mb-4">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                    <span class="text-sm font-semibold uppercase tracking-wide">Trabalhos</span>
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-navy-900 mb-4">
+                    Meu <span class="text-primary-600">Portfólio</span>
+                </h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">
+                    Projetos que desenvolvi combinando tecnologia, educação e inovação.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Portfolio Card 1 -->
+                <a href="https://main-portal-tau.vercel.app/" target="_blank" class="portfolio-card reveal reveal-delay-1 group bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden block">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="http://static.photos/technology/640x360/1" alt="Plataforma Educacional" class="portfolio-img w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-primary-50 text-primary-600 text-xs font-semibold px-2.5 py-1 rounded-full">Educação</span>
+                            <span class="bg-green-50 text-green-600 text-xs font-semibold px-2.5 py-1 rounded-full">Web</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2 group-hover:text-primary-600 transition-colors">Plataforma Educacional</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Uma plataforma de aprendizagem interativa desenvolvida para alunos do SENAI.</p>
+                        <div class="mt-4 flex items-center gap-2 text-primary-600 text-sm font-semibold">
+                            Ver Projeto <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Portfolio Card 2 -->
+                <a href="https://www.antigostaubate.com.br/" target="_blank" class="portfolio-card reveal reveal-delay-2 group bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden block">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=640&q=80" alt="CAAT" class="portfolio-img w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-accent-50 text-accent-600 text-xs font-semibold px-2.5 py-1 rounded-full">Automotivo</span>
+                            <span class="bg-blue-50 text-blue-600 text-xs font-semibold px-2.5 py-1 rounded-full">Website</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2 group-hover:text-primary-600 transition-colors">CAAT - Clube De Autos Antigos de Taubaté</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Site dedicado a carros antigos e eventos automotivos.</p>
+                        <div class="mt-4 flex items-center gap-2 text-primary-600 text-sm font-semibold">
+                            Ver Projeto <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Portfolio Card 3 -->
+                <a href="https://brg.infinityfreeapp.com/login.php" target="_blank" class="portfolio-card reveal reveal-delay-3 group bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden block">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="http://static.photos/technology/640x360/3" alt="Cadastro de Clientes" class="portfolio-img w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-purple-50 text-purple-600 text-xs font-semibold px-2.5 py-1 rounded-full">Sistema</span>
+                            <span class="bg-gray-100 text-gray-600 text-xs font-semibold px-2.5 py-1 rounded-full">PHP</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2 group-hover:text-primary-600 transition-colors">Cadastro de Clientes</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Exemplo de cadastro de clientes com sistema de login e gestão.</p>
+                        <div class="mt-4 flex items-center gap-2 text-primary-600 text-sm font-semibold">
+                            Ver Projeto <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Portfolio Card 4 -->
+                <a href="https://noivas.vercel.app/" target="_blank" class="portfolio-card reveal reveal-delay-1 group bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden block">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://cdn1.casamentos.com.br/home-pics/4/2/fotoHome_142.jpg" alt="Convite de Casamento" class="portfolio-img w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-pink-50 text-pink-600 text-xs font-semibold px-2.5 py-1 rounded-full">Especial</span>
+                            <span class="bg-red-50 text-red-600 text-xs font-semibold px-2.5 py-1 rounded-full">Evento</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2 group-hover:text-primary-600 transition-colors">Convite De Casamento Digital</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Site dedicado não só para divulgação, mas também linkar com o local através do GPS, com facilidade em entregar valores para presentes via PIX.</p>
+                        <div class="mt-4 flex items-center gap-2 text-primary-600 text-sm font-semibold">
+                            Ver Projeto <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Portfolio Card 5 -->
+                <a href="https://wa.me/55129XXXXXXXX?text=Ol%C3%A1!%20Gostaria%20de%20testar%20o%20rob%C3%B4." target="_blank" class="portfolio-card reveal reveal-delay-2 group bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden block">
+                    <div class="aspect-video overflow-hidden bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <div class="portfolio-img flex flex-col items-center gap-3 text-white">
+                            <i data-lucide="bot" class="w-16 h-16"></i>
+                            <span class="text-lg font-bold">WhatsApp Bot</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-green-50 text-green-600 text-xs font-semibold px-2.5 py-1 rounded-full">WhatsApp</span>
+                            <span class="bg-yellow-50 text-yellow-600 text-xs font-semibold px-2.5 py-1 rounded-full">Automação</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2 group-hover:text-primary-600 transition-colors">Assistente Virtual (WhatsApp Bot)</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Um robô para automatizar respostas e fornecer informações 24/7.</p>
+                        <div class="mt-4 flex items-center gap-2 text-green-600 text-sm font-semibold">
+                            Testar no WhatsApp <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Portfolio Card 6 -->
+                <div class="portfolio-card reveal reveal-delay-3 group bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="http://static.photos/technology/640x360/6" alt="Corporate Training" class="portfolio-img w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-indigo-50 text-indigo-600 text-xs font-semibold px-2.5 py-1 rounded-full">Corporativo</span>
+                            <span class="bg-accent-50 text-accent-600 text-xs font-semibold px-2.5 py-1 rounded-full">Treinamento</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2">Corporate Training</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Custom training programs for companies.</p>
+                        <div class="mt-4 flex items-center gap-2 text-gray-400 text-sm font-semibold">
+                            Em breve <i data-lucide="clock" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 lg:py-32 bg-gradient-to-b from-gray-50 to-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 bg-primary-50 text-primary-700 rounded-full px-4 py-2 mb-4">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                    <span class="text-sm font-semibold uppercase tracking-wide">Fale Comigo</span>
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-navy-900 mb-4">
+                    Entre Em <span class="text-primary-600">Contato</span>
+                </h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">
+                    Tem alguma pergunta ou sugestão? Ficarei feliz em ouvir você!
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-8 lg:gap-12">
+                <!-- Contact Info -->
+                <div class="lg:col-span-2 reveal">
+                    <div class="bg-gradient-to-br from-navy-900 via-navy-800 to-primary-900 rounded-3xl p-8 text-white h-full relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-48 h-48 bg-accent-500/10 rounded-full blur-3xl"></div>
+                        <div class="absolute bottom-0 left-0 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl"></div>
+                        <div class="relative z-10">
+                            <h3 class="font-display text-2xl font-bold mb-6">Informações de Contato</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="mail" class="w-5 h-5 text-accent-400"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white/60 text-sm mb-1">Email</p>
+                                        <a href="mailto:welingtonhopka@hotmail.com" class="text-white hover:text-accent-400 transition-colors text-sm break-all">welingtonhopka@hotmail.com</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="map-pin" class="w-5 h-5 text-accent-400"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white/60 text-sm mb-1">Localização</p>
+                                        <p class="text-white text-sm">Pindamonhangaba, SP, Brazil</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="globe" class="w-5 h-5 text-accent-400"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white/60 text-sm mb-1">Website</p>
+                                        <a href="https://mypage-chi-cyan.vercel.app/index.html" class="text-white hover:text-accent-400 transition-colors text-sm" target="_blank">www.welingtonhopka.com</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 pt-8 border-t border-white/10">
+                                <p class="text-white/60 text-sm mb-4">Siga-me nas redes sociais</p>
+                                <div class="flex gap-3">
+                                    <a href="https://www.facebook.com/profile.php?id=100077098840627" target="_blank" class="w-11 h-11 bg-white/10 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/welington_hopka/" target="_blank" class="w-11 h-11 bg-white/10 hover:bg-pink-500 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                                    </a>
+                                    <a href="https://github.com/Whellingthon" target="_blank" class="w-11 h-11 bg-white/10 hover:bg-gray-600 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                                        <i data-lucide="github" class="w-5 h-5"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/welington-hopka/" target="_blank" class="w-11 h-11 bg-white/10 hover:bg-blue-600 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                                    </a>
+                                    <a href="https://www.youtube.com/@welingtonhopka" target="_blank" class="w-11 h-11 bg-white/10 hover:bg-red-600 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                                        <i data-lucide="youtube" class="w-5 h-5"></i>
+                                    </a>
+                                    <a href="https://wa.me/5514997669155" target="_blank" class="w-11 h-11 bg-white/10 hover:bg-green-500 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-3 reveal reveal-delay-1">
+                    <form id="contactForm" class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+                        <div class="grid sm:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-navy-900 mb-2">Nome</label>
+                                <input type="text" id="name" placeholder="Seu nome completo" required class="form-input w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 outline-none focus:border-primary-500 focus:bg-white transition-all" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy-900 mb-2">Email</label>
+                                <input type="email" id="email" placeholder="seuemail@exemplo.com" required class="form-input w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 outline-none focus:border-primary-500 focus:bg-white transition-all" />
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-semibold text-navy-900 mb-2">Assunto</label>
+                            <input type="text" id="subject" placeholder="Assunto da mensagem" class="form-input w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 outline-none focus:border-primary-500 focus:bg-white transition-all" />
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-semibold text-navy-900 mb-2">Mensagem</label>
+                            <textarea id="message" rows="5" placeholder="Escreva sua mensagem..." required class="form-input w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 outline-none focus:border-primary-500 focus:bg-white transition-all resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold px-8 py-4 rounded-xl transition-all hover:shadow-lg hover:shadow-primary-500/25 flex items-center justify-center gap-2 group">
+                            <span>Enviar Mensagem</span>
+                            <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center text-white font-display font-bold text-lg">WH</div>
+                        <span class="font-display font-bold text-lg">Prof. Welington</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Apaixonado por educação e tecnologia, transformando vidas através do conhecimento.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#about" class="hover:text-white transition-colors">Sobre Mim</a></li>
+                        <li><a href="#education" class="hover:text-white transition-colors">Área Acadêmica</a></li>
+                        <li><a href="#students" class="hover:text-white transition-colors">Meus Alunos</a></li>
+                        <li><a href="#portfolio" class="hover:text-white transition-colors">Portfólio</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Formação</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>Análise e Desenv. de Sistemas</li>
+                        <li>Pedagogia - UNESP</li>
+                        <li>Big Data & BI - ENEB</li>
+                        <li>Mobile Apps - UNIVIRTUA</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Redes Sociais</h4>
+                    <div class="flex gap-3">
+                        <a href="https://www.facebook.com/profile.php?id=100077098840627" target="_blank" class="w-10 h-10 bg-white/10 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                            <i data-lucide="facebook" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://www.instagram.com/welington_hopka/" target="_blank" class="w-10 h-10 bg-white/10 hover:bg-pink-500 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://github.com/Whellingthon" target="_blank" class="w-10 h-10 bg-white/10 hover:bg-gray-600 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                            <i data-lucide="github" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/welington-hopka/" target="_blank" class="w-10 h-10 bg-white/10 hover:bg-blue-600 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@welingtonhopka" target="_blank" class="w-10 h-10 bg-white/10 hover:bg-red-600 rounded-xl flex items-center justify-center transition-all hover:scale-110">
+                            <i data-lucide="youtube" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">&copy; 2024 Professor Welington Hopka. Todos os direitos reservados.</p>
+                <div class="flex gap-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Serviço</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top fixed bottom-6 right-6 w-12 h-12 bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-lg flex items-center justify-center z-40 transition-all hover:shadow-xl" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i data-lucide="chevron-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed top-6 right-6 z-50 space-y-3"></div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // ---- Navbar scroll effect ----
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 80) {
+                navbar.classList.add('bg-navy-900/95', 'glass', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-navy-900/95', 'glass', 'shadow-lg');
+            }
+            lastScroll = currentScroll;
+        });
+
+        // ---- Mobile menu ----
+        const menuToggle = document.getElementById('menuToggle');
+        const menuClose = document.getElementById('menuClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+
+        menuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // ---- Scroll reveal animations ----
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ---- Active nav link ----
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ---- Back to top button ----
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // ---- Lightbox ----
+        const galleryImages = [
+            'https://mypage-chi-cyan.vercel.app/img/669F7FA6-8BDA-4A01-B3FB-887013F6FBD4.jpg',
+            'https://mypage-chi-cyan.vercel.app/img/20240202_165415.png',
+            'https://mypage-chi-cyan.vercel.app/img/20231215_215321.png',
+            'https://mypage-chi-cyan.vercel.app/img/20240202_205747.png',
+            'https://mypage-chi-cyan.vercel.app/img/20240412_205747.png',
+            'https://mypage-chi-cyan.vercel.app/img/20240815_115813~2.jpg',
+            'https://mypage-chi-cyan.vercel.app/img/20240819_152459.jpg',
+            'https://mypage-chi-cyan.vercel.app/img/1732730374350%20Copy.jpg',
+            'https://mypage-chi-cyan.vercel.app/img/IMG_0168.png',
+            'https://mypage-chi-cyan.vercel.app/img/IMG_0982.png',
+            'https://mypage-chi-cyan.vercel.app/img/IMG_1544.png',
+            'https://mypage-chi-cyan.vercel.app/img/IMG_1545.png',
+            'https://mypage-chi-cyan.vercel.app/img/IMG_20230813_083108_073.jpg',
+            'https://mypage-chi-cyan.vercel.app/img/IMG_20241204_215123.jpg'
+        ];
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            lightboxImg.src = galleryImages[index];
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event.target === document.getElementById('lightbox') || event.currentTarget.tagName === 'BUTTON') {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function nextImage(event) {
+            event.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            document.getElementById('lightboxImg').src = galleryImages[currentImageIndex];
+        }
+
+        function prevImage(event) {
+            event.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            document.getElementById('lightboxImg').src = galleryImages[currentImageIndex];
+        }
+
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.classList.contains('hidden')) return;
+            if (e.key === 'Escape') {
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+            if (e.key === 'ArrowRight') nextImage(e);
+            if (e.key === 'ArrowLeft') {
+                currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+                document.getElementById('lightboxImg').src = galleryImages[currentImageIndex];
+            }
+        });
+
+        // ---- Hero particles ----
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const colors = ['#3b7aff', '#f5a623', '#ffffff'];
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 6 + 2;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.background = color;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // ---- Contact form ----
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Build mailto link
+            const mailtoSubject = encodeURIComponent(subject || 'Contato via site');
+            const mailtoBody = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\n${message}`);
+            window.open(`mailto:welingtonhopka@hotmail.com?subject=${mailtoSubject}&body=${mailtoBody}`, '_blank');
+
+            showToast('Mensagem preparada! Verifique seu cliente de email.', 'success');
+        });
+
+        // ---- Toast notifications ----
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-primary-500';
+            toast.className = `toast ${bgColor} text-white px-6 py-4 rounded-xl shadow-xl flex items-center gap-3 min-w-[300px]`;
+            const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'x-circle' : 'info';
+            toast.innerHTML = `<i data-lucide="${icon}" class="w-5 h-5 flex-shrink-0"></i><span class="text-sm font-medium">${message}</span>`;
+            container.appendChild(toast);
+            lucide.createIcons();
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // ---- Counter animation ----
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-count]');
+            counters.forEach(counter => {
+                const target = parseInt(counter.dataset.count);
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current) + '+';
+                }, 16);
+            });
+        }
+
+        // Trigger counter animation when visible
+        const counterSection = document.querySelector('#about');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        if (counterSection) counterObserver.observe(counterSection);
+
+        // ---- Smooth scroll for navigation ----
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
